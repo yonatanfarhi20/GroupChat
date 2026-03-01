@@ -1,4 +1,5 @@
 import socket
+import threading
 
 def receive():
     while True:
@@ -29,3 +30,6 @@ nickname = input("Choose your nickname: ")
 client=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client.connect((HOST, PORT))
 
+if __name__ == '__main__':
+    threading.Thread(target=receive).start()
+    threading.Thread(target=write).start()
