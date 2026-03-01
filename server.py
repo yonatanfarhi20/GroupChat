@@ -29,3 +29,15 @@ def broadcast(message, sender_client):
                 print(f"Connection error: {e}")
                 remove(client)
 
+def handle(client):
+    while True:
+        try:
+            message = client.recv(1024)
+            index = clients.index(client)
+            nickname = nicknames[index]
+            formatted_message = f'{nickname}: '.encode('utf-8') + message
+            broadcast(formatted_message, client)
+        except Exception as e:
+            print(f"User disconnected: {e}")
+            remove(client)
+            break
