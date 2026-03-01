@@ -1,6 +1,5 @@
 import socket
 
-
 def receive():
     while True:
         try:
@@ -14,6 +13,15 @@ def receive():
             client.close()
             break
 
+def write():
+    while True:
+        try:
+            message = input("")
+            client.send(message.encode('utf-8'))
+        except Exception as e:
+            print(f"Error sending message: {e}")
+            client.close()
+            break
 
 HOST = '127.0.0.1'
 PORT = 5555
